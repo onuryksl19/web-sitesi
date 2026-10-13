@@ -1,0 +1,836 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Yetgin Pilise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Figtree:wght@400;500;600;700&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        paper: '#F8F9FA',
+        ink: '#1E293B',
+        night: '#0F172A',
+        smoke: '#E2E8F0',
+        petrol: { DEFAULT: '#0284C7', deep: '#0369A1' },
+        wa: '#25D366'
+      },
+      fontFamily: {
+        display: ['"Bricolage Grotesque"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Figtree', 'ui-sans-serif', 'system-ui', 'sans-serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+/* Düzen: atölye kartelası. Sol hizalı başlıklar, cm cetveli ve kumaş numunesi detayları. Tek açık tema. */
+:root {
+  --paper: #F8F9FA;
+  --ink: #1E293B;
+  --night: #0F172A;
+  --smoke: #E2E8F0;
+  --petrol: #0284C7;
+  --petrol-deep: #0369A1;
+  --wa: #25D366;
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: Figtree, ui-sans-serif, system-ui, sans-serif;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--petrol);
+  outline-offset: 2px;
+}
+.wrap { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1rem; }
+@media (min-width: 640px) { .wrap { padding-inline: 1.5rem; } }
+
+.eyebrow { font-size: .875rem; font-weight: 700; letter-spacing: .05em; color: var(--petrol-deep); margin-bottom: .5rem; }
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+  color: var(--night);
+}
+.on-dark .h2, .h2.on-dark { color: #fff; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+  font-weight: 700; line-height: 1.25; text-align: center;
+  border-radius: .875rem; padding: .85rem 1.3rem;
+  transition: transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-wa { background: var(--wa); color: var(--night); }
+.btn-wa:hover { background: #1FBE5B; }
+.btn-dark { background: var(--night); color: #fff; }
+.btn-dark:hover { background: var(--ink); }
+.btn-line { border: 2px solid var(--night); color: var(--night); background: transparent; }
+.btn-line:hover { background: var(--night); color: #fff; }
+.btn-sm { padding: .6rem 1rem; font-size: .9rem; border-radius: .75rem; }
+
+/* Pilise kumaş dokusu: yatay katlar */
+.pleat {
+  background-color: var(--c, #E9DFCB);
+  background-image: repeating-linear-gradient(180deg, rgba(255,255,255,.38) 0, rgba(15,23,42,.13) 6px, rgba(255,255,255,.38) 6px, rgba(15,23,42,.13) 12px);
+}
+.pleat-petek {
+  background-image: repeating-linear-gradient(180deg, rgba(255,255,255,.42) 0, rgba(15,23,42,.2) 7px, rgba(255,255,255,.42) 7px, rgba(15,23,42,.2) 14px);
+}
+.glass { background: linear-gradient(160deg, #BAE6FD 0%, #E0F2FE 55%, #F8FAFC 100%); }
+
+/* cm cetveli */
+.ruler {
+  height: 14px;
+  background-image:
+    repeating-linear-gradient(90deg, var(--night) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(90deg, #64748B 0 1px, transparent 1px 8px);
+  background-size: 100% 14px, 100% 7px;
+  background-position: left bottom, left bottom;
+  background-repeat: no-repeat;
+}
+
+.tab {
+  padding: .6rem 1.1rem; border-radius: 9999px; border: 1.5px solid #CBD5E1;
+  background: #fff; color: var(--ink); font-weight: 600; font-size: .95rem; line-height: 1.3;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.tab:hover { border-color: var(--night); }
+.tab[aria-selected="true"] { background: var(--night); color: #fff; border-color: var(--night); }
+
+.dot {
+  width: 1.75rem; height: 1.75rem; border-radius: 9999px; background: var(--c);
+  border: 1px solid rgba(15,23,42,.3); box-shadow: inset 0 0 0 2px #fff;
+}
+.dot.is-on { outline: 2px solid var(--night); outline-offset: 2px; }
+
+.field {
+  width: 100%; border-radius: .75rem; border: 1.5px solid #CBD5E1; background: #fff;
+  padding: .7rem .9rem; color: var(--ink); font-size: 1rem; line-height: 1.4;
+}
+.field:focus { border-color: var(--petrol); }
+.label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: .35rem; color: var(--night); }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9 10h.01"/><path d="M12 10h.01"/><path d="M15 10h.01"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 24 24"><path d="M3 5h18"/><path d="M3 9.5 12 12l9-2.5"/><path d="M3 14 12 16.5 21 14"/><path d="M3 19h18"/></symbol>
+  </defs>
+</svg>
+
+<header id="top" class="sticky z-40 border-b border-slate-200 bg-paper/90 backdrop-blur" style="top:env(safe-area-inset-top,0px)">
+  <div class="wrap flex h-16 items-center justify-between gap-3">
+    <a href="#top" class="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight text-night" aria-label="Yetgin Pilise ana sayfa">
+      <span class="grid h-9 w-9 place-items-center rounded-lg bg-night text-white">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-logo"/></svg>
+      </span>
+      <span>Yetgin Pilise</span>
+    </a>
+    <nav class="hidden items-center gap-8 text-[.95rem] font-semibold text-ink md:flex" aria-label="Ana menü">
+      <a class="hover:text-petrol-deep" href="#modeller">Modeller</a>
+      <a class="hover:text-petrol-deep" href="#olcu-rehberi">Ölçü Rehberi</a>
+      <a class="hover:text-petrol-deep" href="#imalat">İmalat Süreci</a>
+      <a class="hover:text-petrol-deep" href="#iletisim">İletişim</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="#teklif" data-wa="Merhaba, pilise perde için fiyat teklifi almak istiyorum." class="btn btn-wa btn-sm">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chat"/></svg>
+        <span><span class="max-[420px]:hidden">Hemen&nbsp;</span>Teklif Al</span>
+      </a>
+      <button id="menu-btn" type="button" class="grid h-10 w-10 place-items-center rounded-xl border border-slate-300 bg-white text-night md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menüyü aç">
+        <svg id="menu-ico" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-nav" class="border-t border-slate-200 bg-paper md:hidden" aria-label="Mobil menü" hidden>
+    <div class="wrap flex flex-col py-2 text-base font-semibold text-night">
+      <a class="py-3" href="#modeller">Modeller</a>
+      <a class="border-t border-slate-200 py-3" href="#olcu-rehberi">Ölçü Rehberi</a>
+      <a class="border-t border-slate-200 py-3" href="#imalat">İmalat Süreci</a>
+      <a class="border-t border-slate-200 py-3" href="#iletisim">İletişim</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="wrap pb-16 pt-10 sm:pt-14 lg:pb-24 lg:pt-20" aria-labelledby="hero-title">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
+      <div class="min-w-0">
+        <p class="mb-5 inline-flex items-center gap-2 rounded-full bg-smoke px-3.5 py-1.5 text-sm font-semibold text-night">
+          <span class="h-2 w-2 rounded-full bg-petrol"></span>Üretici atölyeden doğrudan satış
+        </p>
+        <h1 id="hero-title" class="font-display text-[2.4rem] font-bold leading-[1.05] tracking-tight text-night text-balance sm:text-5xl lg:text-[3.5rem]">
+          Doğrudan İmalatçıdan Özel Ölçü Pilise Perde Sistemleri
+        </h1>
+        <p class="mt-5 max-w-xl text-lg text-slate-600">
+          Balkon, kış bahçesi ve standart pencereler için kaliteli kumaş, dayanıklı mekanizma ve kusursuz işçilik.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#teklif" data-wa="Merhaba, pilise perde ölçülerim var, fiyat teklifi almak istiyorum." class="btn btn-wa">
+            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chat"/></svg>
+            WhatsApp ile Ölçünü Gönder, Fiyat Al
+          </a>
+          <a href="#modeller" class="btn btn-line">Modelleri İncele</a>
+        </div>
+        <p class="mt-5 max-w-xl text-sm text-slate-600">
+          Sitede çevrim içi ödeme yoktur. Net fiyatı ve kumaş kartelasını WhatsApp üzerinden alırsınız.
+        </p>
+      </div>
+
+      <div class="min-w-0" aria-hidden="true">
+        <div class="relative rounded-[1.75rem] bg-smoke p-4 sm:p-6">
+          <div class="rounded-xl p-2.5 sm:p-3" style="background:linear-gradient(135deg,#CBD5E1,#94A3B8)">
+            <div class="grid grid-cols-3 gap-2">
+              <div class="glass relative h-64 overflow-hidden rounded-sm sm:h-80">
+                <div class="pleat absolute inset-x-0 top-0" style="--c:#E9DFCB;height:78%"><span class="absolute inset-x-0 bottom-0 h-1.5 bg-night/70"></span></div>
+                <span class="absolute inset-x-0 top-0 h-2.5 bg-night"></span>
+              </div>
+              <div class="glass relative h-64 overflow-hidden rounded-sm sm:h-80">
+                <div class="pleat absolute inset-x-0 top-0" style="--c:#4A5361;height:46%"><span class="absolute inset-x-0 bottom-0 h-1.5 bg-night/70"></span></div>
+                <span class="absolute inset-x-0 top-0 h-2.5 bg-night"></span>
+              </div>
+              <div class="glass relative h-64 overflow-hidden rounded-sm sm:h-80">
+                <div class="pleat absolute inset-x-0 top-0" style="--c:#F2F3EF;height:100%"><span class="absolute inset-x-0 bottom-0 h-1.5 bg-night/70"></span></div>
+                <span class="absolute inset-x-0 top-0 h-2.5 bg-night"></span>
+              </div>
+            </div>
+          </div>
+          <div class="ruler mt-4 w-full"></div>
+          <div class="mt-2 flex justify-between text-xs font-semibold text-slate-600">
+            <span>0</span><span>cm</span><span>120</span>
+          </div>
+          <div class="absolute -bottom-4 right-5 rounded-xl bg-night px-4 py-2.5 text-sm font-semibold text-white shadow-lg">
+            Örnek ölçü: 118,5 × 164 cm
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEDEN BİZ -->
+  <section id="avantaj" class="border-y border-slate-200 bg-white py-16 lg:py-24" aria-labelledby="avantaj-title">
+    <div class="wrap">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Üretici avantajı</p>
+        <h2 id="avantaj-title" class="h2">Neden Yetgin Pilise?</h2>
+        <p class="mt-3 text-slate-600">Perdeyi üreten atölye ile siz arasında kimse yok. Fiyat, kalite ve ölçü doğrudan bizde.</p>
+      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <article class="flex flex-col gap-4 rounded-2xl bg-night p-6 text-white">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-white/10 text-white">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-tag"/></svg>
+          </span>
+          <h3 class="font-display text-xl font-bold leading-snug">Aracısız, fabrikadan halka fiyat</h3>
+          <p class="text-slate-300">Üretim atölyemizden doğrudan size. Bayi ve toptancı payı fiyata eklenmez.</p>
+        </article>
+        <article class="flex flex-col gap-4 rounded-2xl bg-smoke p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-white text-petrol-deep">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg>
+          </span>
+          <h3 class="font-display text-xl font-bold leading-snug text-night">1. sınıf kumaş ve alüminyum profil</h3>
+          <p class="text-slate-600">Solmaya dayanıklı kumaş ve eğilmeyen alüminyum profil. Her sezon aynı düzgün katlanma.</p>
+        </article>
+        <article class="flex flex-col gap-4 rounded-2xl bg-smoke p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-white text-petrol-deep">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ruler"/></svg>
+          </span>
+          <h3 class="font-display text-xl font-bold leading-snug text-night">Milimetrik özel üretim</h3>
+          <p class="text-slate-600">Her kanat verdiğiniz ölçüye göre kesilir. Boşluk bırakmayan, tam oturan perde.</p>
+        </article>
+        <article class="flex flex-col gap-4 rounded-2xl bg-smoke p-6">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-white text-petrol-deep">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-truck"/></svg>
+          </span>
+          <h3 class="font-display text-xl font-bold leading-snug text-night">Türkiye geneli güvenli gönderim, kolay montaj</h3>
+          <p class="text-slate-600">Özenle paketlenip kargolanır. Montaj için görsel anlatım ve WhatsApp desteği yanınızda.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATALOG -->
+  <section id="modeller" class="py-16 lg:py-24" aria-labelledby="modeller-title">
+    <div class="wrap">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Katalog</p>
+        <h2 id="modeller-title" class="h2">Ürün ve kumaş çeşitleri</h2>
+        <p class="mt-3 text-slate-600">Dört seri, hepsi ölçüye özel üretilir. Rengi seçin, modeli WhatsApp'a gönderin, kartelayı ve net fiyatı alın.</p>
+      </div>
+      <div id="tabs" role="tablist" aria-label="Ürün serileri" class="mt-8 flex flex-wrap gap-2"></div>
+      <div id="panel" role="tabpanel" class="mt-8 grid gap-6 lg:grid-cols-3"></div>
+    </div>
+  </section>
+
+  <!-- ÖLÇÜ REHBERİ -->
+  <section id="olcu-rehberi" class="border-y border-slate-200 bg-white py-16 lg:py-24" aria-labelledby="olcu-title">
+    <div class="wrap">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Ölçü rehberi</p>
+        <h2 id="olcu-title" class="h2">Nasıl ölçü alınır?</h2>
+        <p class="mt-3 text-slate-600">Bir metre ve birkaç dakika yeter. Cam balkon kanatları ve sabit pencereler için adım adım.</p>
+      </div>
+
+      <div class="mt-10 grid items-start gap-8 lg:grid-cols-[.9fr_1.1fr]">
+        <figure class="min-w-0 rounded-2xl bg-smoke p-5 sm:p-6">
+          <svg viewBox="0 0 340 290" class="h-auto w-full" role="img" aria-label="Pencere kanadında en için üst, orta ve alt noktalar, boy için sol, orta ve sağ noktalar gösteren ölçü şeması">
+            <defs>
+              <linearGradient id="g-glass" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#BAE6FD"/><stop offset="1" stop-color="#F1F5F9"/>
+              </linearGradient>
+              <pattern id="g-pleat" width="10" height="12" patternUnits="userSpaceOnUse">
+                <rect width="10" height="12" fill="#E9DFCB"/>
+                <rect width="10" height="6" fill="#FFFFFF" opacity=".4"/>
+                <rect y="6" width="10" height="6" fill="#0F172A" opacity=".1"/>
+              </pattern>
+              <marker id="g-arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+                <path d="M0 0 L8 4 L0 8z" fill="#0F172A"/>
+              </marker>
+            </defs>
+            <!-- ölçü okları -->
+            <line x1="68" y1="24" x2="174" y2="24" stroke="#0F172A" stroke-width="1.5" marker-start="url(#g-arr)" marker-end="url(#g-arr)"/>
+            <text x="121" y="16" text-anchor="middle" font-size="13" font-weight="700" fill="#0F172A">EN (cm)</text>
+            <line x1="36" y1="50" x2="36" y2="262" stroke="#0F172A" stroke-width="1.5" marker-start="url(#g-arr)" marker-end="url(#g-arr)"/>
+            <text transform="translate(22 156) rotate(-90)" text-anchor="middle" font-size="13" font-weight="700" fill="#0F172A">BOY (cm)</text>
+            <!-- pencere -->
+            <rect x="60" y="40" width="240" height="230" rx="4" fill="#94A3B8"/>
+            <rect x="68" y="48" width="106" height="214" fill="url(#g-glass)"/>
+            <rect x="186" y="48" width="106" height="214" fill="url(#g-glass)"/>
+            <!-- yanındaki kanatta örnek perde -->
+            <rect x="186" y="48" width="106" height="118" fill="url(#g-pleat)"/>
+            <rect x="186" y="48" width="106" height="6" fill="#0F172A"/>
+            <rect x="186" y="164" width="106" height="4" fill="#0F172A" opacity=".75"/>
+            <!-- en ölçü noktaları -->
+            <g stroke="#0284C7" stroke-width="2" stroke-dasharray="5 4">
+              <line x1="70" y1="92" x2="172" y2="92"/>
+              <line x1="70" y1="156" x2="172" y2="156"/>
+              <line x1="70" y1="220" x2="172" y2="220"/>
+            </g>
+            <g fill="#0284C7">
+              <circle cx="70" cy="92" r="3.5"/><circle cx="172" cy="92" r="3.5"/>
+              <circle cx="70" cy="156" r="3.5"/><circle cx="172" cy="156" r="3.5"/>
+              <circle cx="70" cy="220" r="3.5"/><circle cx="172" cy="220" r="3.5"/>
+            </g>
+            <g font-size="11" font-weight="700" fill="#0369A1" text-anchor="end">
+              <text x="170" y="85">E1</text><text x="170" y="149">E2</text><text x="170" y="213">E3</text>
+            </g>
+            <!-- boy ölçü noktaları -->
+            <g stroke="#0F172A" stroke-width="2" stroke-dasharray="5 4" opacity=".8">
+              <line x1="82" y1="56" x2="82" y2="244"/>
+              <line x1="112" y1="56" x2="112" y2="244"/>
+              <line x1="142" y1="56" x2="142" y2="244"/>
+            </g>
+            <g fill="#0F172A">
+              <circle cx="82" cy="56" r="3.5"/><circle cx="82" cy="244" r="3.5"/>
+              <circle cx="112" cy="56" r="3.5"/><circle cx="112" cy="244" r="3.5"/>
+              <circle cx="142" cy="56" r="3.5"/><circle cx="142" cy="244" r="3.5"/>
+            </g>
+            <g font-size="11" font-weight="700" fill="#0F172A" text-anchor="middle">
+              <text x="82" y="258">B1</text><text x="112" y="258">B2</text><text x="142" y="258">B3</text>
+            </g>
+            <text x="239" y="196" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">Her kanadı ayrı</text>
+            <text x="239" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">ölçün</text>
+          </svg>
+          <figcaption class="mt-3 text-sm text-slate-600">E1-E3: en ölçüleri (üst, orta, alt). B1-B3: boy ölçüleri (sol, orta, sağ).</figcaption>
+        </figure>
+
+        <div class="min-w-0">
+          <div id="guide-tabs" role="tablist" aria-label="Pencere tipi" class="flex flex-wrap gap-2"></div>
+          <ol id="guide-steps" class="mt-6 flex flex-col gap-5" role="tabpanel"></ol>
+          <p class="mt-6 text-sm text-slate-600">Montaj şekline göre ölçü yöntemi değişebilir. Emin değilseniz fotoğraf göndermeniz yeterli.</p>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-col items-start gap-5 rounded-2xl bg-night p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div class="flex min-w-0 items-start gap-4">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white/10">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-camera"/></svg>
+          </span>
+          <div class="min-w-0">
+            <h3 class="font-display text-xl font-bold leading-snug">Ölçü alırken kararsız mı kaldınız?</h3>
+            <p class="mt-1 text-slate-300">Pencerenizin fotoğrafını WhatsApp'tan atın, biz yardımcı olalım.</p>
+          </div>
+        </div>
+        <a href="#iletisim" data-wa="Merhaba, pencerem için ölçü alırken kararsız kaldım. Fotoğrafını gönderiyorum, yardımcı olur musunuz?" class="btn btn-wa shrink-0">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chat"/></svg>
+          Fotoğraf Gönder
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- İMALAT SÜRECİ -->
+  <section id="imalat" class="py-16 lg:py-24" aria-labelledby="imalat-title">
+    <div class="wrap">
+      <div class="max-w-2xl">
+        <p class="eyebrow">İmalat süreci</p>
+        <h2 id="imalat-title" class="h2">Ölçüden montaja dört adım</h2>
+      </div>
+      <ol class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <li class="border-t-2 border-night pt-5">
+          <span class="font-display text-5xl font-bold text-petrol-deep">1</span>
+          <h3 class="mt-3 font-display text-xl font-bold text-night">Ölçünüzü gönderin</h3>
+          <p class="mt-2 text-slate-600">Ölçüleri pencere fotoğrafıyla birlikte WhatsApp'tan iletin.</p>
+        </li>
+        <li class="border-t-2 border-night pt-5">
+          <span class="font-display text-5xl font-bold text-petrol-deep">2</span>
+          <h3 class="mt-3 font-display text-xl font-bold text-night">Teklif ve kartela</h3>
+          <p class="mt-2 text-slate-600">Net fiyatı ve kumaş kartelasını size iletelim.</p>
+        </li>
+        <li class="border-t-2 border-night pt-5">
+          <span class="font-display text-5xl font-bold text-petrol-deep">3</span>
+          <h3 class="mt-3 font-display text-xl font-bold text-night">Ölçüye özel üretim</h3>
+          <p class="mt-2 text-slate-600">Onayladığınız ölçüler atölyemizde kesilip birleştirilir.</p>
+        </li>
+        <li class="border-t-2 border-night pt-5">
+          <span class="font-display text-5xl font-bold text-petrol-deep">4</span>
+          <h3 class="mt-3 font-display text-xl font-bold text-night">Kargo ve montaj</h3>
+          <p class="mt-2 text-slate-600">Paketlenip kargolanır. Montaj için görsel anlatım ve destek veririz.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- HESAPLAYICI -->
+  <section id="teklif" class="bg-night py-16 text-white lg:py-24" aria-labelledby="teklif-title">
+    <div class="wrap grid items-start gap-10 lg:grid-cols-[.85fr_1.15fr]">
+      <div class="min-w-0">
+        <p class="eyebrow" style="color:#7DD3FC">Talep oluşturucu</p>
+        <h2 id="teklif-title" class="h2 on-dark">Ölçünüzü yazın, talebiniz hazır olsun</h2>
+        <p class="mt-4 max-w-md text-slate-300">
+          Form ölçülerinizi derler ve hazır bir WhatsApp mesajına çevirir. Net fiyatı ve kumaş kartelasını mesajın ardından size göndeririz.
+        </p>
+        <p class="mt-4 max-w-md text-sm text-slate-400">
+          Girdiğiniz bilgiler bu sayfadan bir sunucuya gönderilmez. Mesajı WhatsApp'ta siz iletirsiniz.
+        </p>
+      </div>
+
+      <form id="lead-form" class="min-w-0 rounded-2xl bg-paper p-5 text-ink sm:p-7" novalidate>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="label" for="f-tip">Pencere tipi</label>
+            <select id="f-tip" class="field">
+              <option>Cam balkon kanadı</option>
+              <option>Sabit pencere</option>
+              <option>Kış bahçesi</option>
+            </select>
+          </div>
+          <div>
+            <label class="label" for="f-seri">Kumaş serisi</label>
+            <select id="f-seri" class="field"></select>
+          </div>
+          <div>
+            <label class="label" for="f-en">En (cm)</label>
+            <input id="f-en" class="field" type="text" inputmode="decimal" value="120" autocomplete="off">
+          </div>
+          <div>
+            <label class="label" for="f-boy">Boy (cm)</label>
+            <input id="f-boy" class="field" type="text" inputmode="decimal" value="150" autocomplete="off">
+          </div>
+          <div>
+            <label class="label" for="f-adet">Adet (kanat sayısı)</label>
+            <input id="f-adet" class="field" type="text" inputmode="numeric" value="1" autocomplete="off">
+          </div>
+          <div>
+            <label class="label" for="f-ad">Adınız (isteğe bağlı)</label>
+            <input id="f-ad" class="field" type="text" autocomplete="name">
+          </div>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Alanlarda örnek ölçü var. Kendi ölçünüzle değiştirin.</p>
+
+        <div id="f-hata" class="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-800" role="alert" hidden></div>
+
+        <div id="f-sonuc" class="mt-5 rounded-2xl bg-smoke p-5" aria-live="polite">
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
+            <div class="grid shrink-0 place-items-center sm:w-40" aria-hidden="true">
+              <div id="prev-box" class="glass relative overflow-hidden rounded-sm border-4 border-slate-400" style="width:104px;height:130px">
+                <div id="prev-shade" class="pleat absolute inset-0"></div>
+                <span class="absolute inset-x-0 top-0 h-2 bg-night"></span>
+              </div>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-display text-xl font-bold text-night">Ölçüleriniz hazır!</p>
+              <p id="sonuc-ozet" class="mt-1 text-sm font-semibold text-slate-700"></p>
+              <p class="mt-3 text-slate-700">"WhatsApp'a Aktar" butonuna tıklayarak net fiyatı ve kumaş kartelasını hemen öğrenin.</p>
+              <a id="sonuc-wa" href="#teklif" class="btn btn-wa mt-4 w-full sm:w-auto">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chat"/></svg>
+                WhatsApp'a Aktar
+              </a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- İLETİŞİM -->
+  <section id="iletisim" class="py-16 lg:py-24" aria-labelledby="iletisim-title">
+    <div class="wrap grid gap-10 lg:grid-cols-2">
+      <div class="min-w-0">
+        <p class="eyebrow">İletişim</p>
+        <h2 id="iletisim-title" class="h2">Atölyemiz ve ulaşım bilgileri</h2>
+        <ul class="mt-8 flex flex-col gap-6">
+          <li class="flex items-start gap-4">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-smoke text-petrol-deep">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pin"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="font-bold text-night">Atölye / üretim yeri</p>
+              <p class="text-slate-600">[Atölye adresinizi buraya yazın: mahalle, cadde, no, ilçe / il]</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-smoke text-petrol-deep">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-phone"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="font-bold text-night">Telefon</p>
+              <p class="text-slate-600">0 (5xx) xxx xx xx</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-smoke text-petrol-deep">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-clock"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="font-bold text-night">Çalışma saatleri</p>
+              <p class="text-slate-600">[Gün ve saat aralığını yazın]</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="min-w-0 self-start rounded-2xl bg-smoke p-6 sm:p-8">
+        <h3 class="font-display text-2xl font-bold leading-snug text-night">Ölçünüz hazırsa tek mesaj yeterli</h3>
+        <p class="mt-3 text-slate-700">En ve boy ölçülerinizi, varsa pencere fotoğrafınızı gönderin. Fiyatı ve kumaş kartelasını WhatsApp'tan iletelim.</p>
+        <a href="#teklif" data-wa="Merhaba, pilise perde ölçülerim var, fiyat teklifi almak istiyorum." class="btn btn-wa mt-6 w-full sm:w-auto">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chat"/></svg>
+          WhatsApp Üzerinden Fiyat / Teklif Al
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-slate-200 bg-white pb-24 pt-10">
+  <div class="wrap flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <div class="min-w-0">
+      <p class="font-display text-lg font-bold text-night">Yetgin Pilise</p>
+      <p class="text-sm text-slate-600">Özel ölçü pilise perde imalatı. Fiyat bilgisi WhatsApp üzerinden verilir.</p>
+    </div>
+    <nav class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-ink" aria-label="Alt menü">
+      <a class="hover:text-petrol-deep" href="#modeller">Modeller</a>
+      <a class="hover:text-petrol-deep" href="#olcu-rehberi">Ölçü Rehberi</a>
+      <a class="hover:text-petrol-deep" href="#imalat">İmalat Süreci</a>
+      <a class="hover:text-petrol-deep" href="#iletisim">İletişim</a>
+    </nav>
+  </div>
+  <div class="wrap mt-6">
+    <p class="text-xs text-slate-500">© 2026 Yetgin Pilise. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<a href="#teklif" data-wa="Merhaba, pilise perde ölçülerim var, fiyat teklifi almak istiyorum." class="fixed right-4 z-50 flex items-center gap-2.5 rounded-full bg-wa px-4 py-3.5 font-bold text-night shadow-xl transition hover:-translate-y-0.5 sm:right-6" style="bottom:calc(1rem + env(safe-area-inset-bottom,0px))" aria-label="WhatsApp'tan yazın">
+  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chat"/></svg>
+  <span class="hidden sm:inline">WhatsApp'tan yazın</span>
+</a>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Ayarlar: WhatsApp numarasını ülke koduyla, başında + ve boşluk olmadan yazın. */
+  var CFG = { wa: '905XXXXXXXXX', min: 20, max: 400 };
+
+  var SERILER = [
+    { id: 'cam', ad: 'Cam Balkon Perdeleri', kisa: 'Cam Balkon', renk: '#E9DFCB' },
+    { id: 'karartma', ad: 'Karartma (Blackout) Serisi', kisa: 'Karartma', renk: '#3C4452' },
+    { id: 'tul', ad: 'Tül / Yarı Geçirgen Seriler', kisa: 'Tül', renk: '#F4F4F1' },
+    { id: 'petek', ad: 'Isı Yalıtımlı Petek Seriler', kisa: 'Petek', renk: '#F1F2EE' }
+  ];
+
+  /* Örnek ürünler. Adları, kumaş bilgilerini ve renkleri kendi kataloğunuza göre değiştirin. */
+  var URUNLER = [
+    { seri: 'cam', ad: 'Klasik Cam Balkon', kumas: 'Yarı geçirgen polyester dokuma',
+      ozellik: ['Gün ışığını yumuşatır', 'UV\'ye dayanıklı kumaş', 'Nemli bezle silinir'],
+      renk: [['Krem', '#E9DFCB'], ['Bej', '#D5C4A5'], ['Gri', '#B7BEC8'], ['Beyaz', '#F2F3EF']] },
+    { seri: 'cam', ad: 'Mat Cam Balkon', kumas: 'Mat yüzeyli dokuma kumaş',
+      ozellik: ['Yansımasız mat görünüm', 'Dar çıtada düzgün katlanır', 'Solmaya dayanıklı'],
+      renk: [['Kum', '#CDBA9A'], ['Taş', '#A9ADB1'], ['Antrasit', '#4A5361']] },
+    { seri: 'cam', ad: 'Doku Cam Balkon', kumas: 'İnce dokulu kumaş',
+      ozellik: ['Dokulu, sıcak görünüm', 'Hafif ve kolay hareket eder', 'Silinerek temizlenir'],
+      renk: [['Ekru', '#EFE7D6'], ['Fildişi', '#F6F1E4'], ['Toprak', '#A58E74']] },
+
+    { seri: 'karartma', ad: 'Blackout Mat', kumas: 'Üç katmanlı karartma kumaşı',
+      ozellik: ['Işık geçirmez yapı', 'Odayı serin tutar', 'Silinebilir yüzey'],
+      renk: [['Antrasit', '#3C4452'], ['Lacivert', '#27344D'], ['Bej', '#CDBFA6'], ['Beyaz', '#ECECE8']] },
+    { seri: 'karartma', ad: 'Blackout Metalik', kumas: 'Metalik arka yüzlü karartma kumaşı',
+      ozellik: ['Arka yüzü ısıyı yansıtır', 'Işık sızdırmaz', 'Yaz ve kış kullanıma uygun'],
+      renk: [['Gümüş Gri', '#A3AAB5'], ['Grafit', '#4B5563'], ['Şampanya', '#C9B99A']] },
+    { seri: 'karartma', ad: 'Blackout Doku', kumas: 'Dokulu ön yüz, karartma astarı',
+      ozellik: ['Dokulu şık görünüm', 'Karartma astarı', 'Temizliği kolay'],
+      renk: [['Kahve', '#6B5B4B'], ['Taş', '#B1A794'], ['Koyu Gri', '#565E6B']] },
+
+    { seri: 'tul', ad: 'Tül Hafif', kumas: 'İnce, yarı saydam kumaş',
+      ozellik: ['Dışarıyı görmenizi engellemez', 'Gün ışığını içeri alır', 'Hafif yapı'],
+      renk: [['Beyaz', '#F4F4F1'], ['Ekru', '#ECE5D3'], ['Açık Gri', '#D3D7DC']] },
+    { seri: 'tul', ad: 'Tül Dokulu', kumas: 'Dokulu yarı geçirgen kumaş',
+      ozellik: ['Mahremiyet sağlar', 'Gün ışığını yayar', 'Dokulu görünüm'],
+      renk: [['Krem', '#E6DCC5'], ['Kum', '#D1C2A3'], ['Gri', '#C0C6CE']] },
+    { seri: 'tul', ad: 'Tül Şeritli', kumas: 'İnce şerit desenli kumaş',
+      ozellik: ['Hafif şerit deseni', 'Yumuşak ışık geçirir', 'Kolay silinir'],
+      renk: [['Beyaz', '#F1F1EE'], ['Bej', '#DDD1B8'], ['Mavi Gri', '#BDC9D6']] },
+
+    { seri: 'petek', ad: 'Tek Petek', kumas: 'Tek hava boşluklu petek yapı',
+      ozellik: ['Hava boşluğu ısı kaybını azaltır', 'Yazın sıcağı keser', 'Sade, düzenli görünüm'],
+      renk: [['Beyaz', '#F1F2EE'], ['Krem', '#E4D9C2'], ['Gri', '#B5BCC6']] },
+    { seri: 'petek', ad: 'Çift Petek', kumas: 'İki hava boşluklu petek yapı',
+      ozellik: ['Daha yüksek yalıtım', 'Isı ve ses dengesi', 'Kış bahçesine uygun'],
+      renk: [['Beyaz', '#F3F3EF'], ['Bej', '#D2C2A4'], ['Antrasit', '#4D5563']] },
+    { seri: 'petek', ad: 'Petek Karartma', kumas: 'Karartmalı petek kumaş',
+      ozellik: ['Petek yapı ve karartma bir arada', 'Kışın ve yazın verimli', 'Yatak odasına uygun'],
+      renk: [['Gri', '#8E96A3'], ['Antrasit', '#3F4756'], ['Krem', '#DCD0B6']] }
+  ];
+
+  var GUIDE = {
+    cam: { ad: 'Cam balkon kanadı', adim: [
+      ['Her kanadı ayrı ölçün', 'Camlar aynı görünse de santim farkları olabilir. Her kanadın ölçüsünü ayrı not alın.'],
+      ['Eni üç noktadan alın', 'Camın görünen yüzeyini üstten, ortadan ve alttan ölçün (E1, E2, E3). Üçü farklıysa en küçüğünü yazın.'],
+      ['Boyu üç noktadan alın', 'Soldan, ortadan ve sağdan ölçün (B1, B2, B3). Farklı çıkarsa en büyüğünü yazın.'],
+      ['Santimetre olarak gönderin', 'Örnek: 118,5 × 164 cm. Kanat sayısını da yazın ve ölçüleri WhatsApp\'tan iletin.']
+    ] },
+    sabit: { ad: 'Sabit pencere', adim: [
+      ['Montaj yerini belirleyin', 'Perde cam yüzeyine mi, kasa içine mi gelecek? Karar vermediyseniz fotoğraf gönderin, birlikte seçelim.'],
+      ['Eni üç noktadan alın', 'Montaj yerinin üstünden, ortasından ve altından ölçün (E1, E2, E3). En küçük değeri yazın.'],
+      ['Boyu üç noktadan alın', 'Sol, orta ve sağ hattından ölçün (B1, B2, B3). En büyük değeri yazın.'],
+      ['Kol ve kilit payına bakın', 'Pencerede kol, menteşe veya kilit varsa yerini fotoğrafta gösterin. Perdenin kullanımını engellemeyecek şekilde ayarlarız.']
+    ] }
+  };
+
+  function $(id) { return document.getElementById(id); }
+  function waUrl(msg) { return 'https://wa.me/' + CFG.wa + '?text=' + encodeURIComponent(msg); }
+  function bindWa(root) {
+    (root || document).querySelectorAll('[data-wa]').forEach(function (a) {
+      a.href = waUrl(a.getAttribute('data-wa'));
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+  }
+  function icon(id, cls) {
+    return '<svg class="' + cls + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#' + id + '"/></svg>';
+  }
+  function seriBul(id) { return SERILER.filter(function (s) { return s.id === id; })[0]; }
+
+  /* ---------- Mobil menü ---------- */
+  var menuBtn = $('menu-btn'), mobileNav = $('mobile-nav'), menuIco = $('menu-ico');
+  function menuSet(open) {
+    mobileNav.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
+    menuIco.innerHTML = '<use href="#' + (open ? 'i-x' : 'i-menu') + '"/>';
+  }
+  menuBtn.addEventListener('click', function () { menuSet(mobileNav.hidden); });
+  mobileNav.addEventListener('click', function (e) { if (e.target.closest('a')) menuSet(false); });
+
+  /* ---------- Katalog ---------- */
+  var tabsEl = $('tabs'), panelEl = $('panel');
+  var aktif = SERILER[0].id;
+  var secili = {};
+
+  function ctaMesaj(i) {
+    var p = URUNLER[i], s = seriBul(p.seri), r = p.renk[secili[i] || 0][0];
+    return 'Merhaba, ' + s.ad + ' grubundaki "' + p.ad + '" modeli için ' + r + ' renkte fiyat teklifi almak istiyorum. Ölçülerimi göndereceğim.';
+  }
+
+  function renderTabs() {
+    tabsEl.innerHTML = SERILER.map(function (s) {
+      var on = s.id === aktif;
+      return '<button type="button" role="tab" class="tab" id="tab-' + s.id + '" data-s="' + s.id + '" aria-selected="' + on + '" aria-controls="panel" tabindex="' + (on ? 0 : -1) + '">' + s.ad + '</button>';
+    }).join('');
+    panelEl.setAttribute('aria-labelledby', 'tab-' + aktif);
+  }
+
+  function kartHtml(i) {
+    var p = URUNLER[i], s = seriBul(p.seri), ri = secili[i] || 0;
+    var tul = p.seri === 'tul', petek = p.seri === 'petek';
+    var dots = p.renk.map(function (r, k) {
+      return '<button type="button" class="dot' + (k === ri ? ' is-on' : '') + '" data-k="' + k + '" aria-label="' + r[0] + '" aria-pressed="' + (k === ri) + '" style="--c:' + r[1] + '"></button>';
+    }).join('');
+    var liste = p.ozellik.map(function (o) {
+      return '<li class="flex items-start gap-2 text-slate-700">' + icon('i-check', 'mt-1 h-4 w-4 shrink-0 text-petrol-deep') + '<span>' + o + '</span></li>';
+    }).join('');
+    return '<article class="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white md:flex-row lg:flex-col" data-u="' + i + '">' +
+      '<div class="glass relative aspect-[5/4] md:aspect-auto md:min-h-[14rem] md:w-2/5 lg:aspect-[5/4] lg:min-h-0 lg:w-auto" aria-hidden="true">' +
+        '<div class="swatch pleat' + (petek ? ' pleat-petek' : '') + ' absolute inset-x-0 top-0" style="--c:' + p.renk[ri][1] + ';height:86%;opacity:' + (tul ? '.72' : '1') + '"><span class="absolute inset-x-0 bottom-0 h-1.5 bg-night/70"></span></div>' +
+        '<span class="absolute inset-x-0 top-0 h-2.5 bg-night"></span>' +
+      '</div>' +
+      '<div class="flex min-w-0 flex-1 flex-col gap-4 p-5">' +
+        '<div><p class="text-sm font-semibold text-petrol-deep">' + s.kisa + '</p>' +
+        '<h3 class="font-display text-xl font-bold leading-snug text-night">' + p.ad + '</h3>' +
+        '<p class="mt-1 text-sm text-slate-600">' + p.kumas + '</p></div>' +
+        '<ul class="flex flex-col gap-1.5 text-sm">' + liste + '</ul>' +
+        '<div><p class="text-sm text-slate-600">Renk: <span class="font-semibold text-night" data-renk>' + p.renk[ri][0] + '</span></p>' +
+        '<div class="mt-2 flex flex-wrap gap-2.5">' + dots + '</div></div>' +
+        '<a href="#teklif" class="btn btn-wa mt-auto" data-cta data-wa="' + ctaMesaj(i).replace(/"/g, '&quot;') + '">Bu Model İçin Teklif İste</a>' +
+      '</div></article>';
+  }
+
+  function renderPanel() {
+    var html = '';
+    URUNLER.forEach(function (p, i) { if (p.seri === aktif) html += kartHtml(i); });
+    panelEl.innerHTML = html;
+    bindWa(panelEl);
+  }
+
+  tabsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    aktif = b.getAttribute('data-s');
+    renderTabs();
+    renderPanel();
+  });
+  tabsEl.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    var idx = SERILER.map(function (s) { return s.id; }).indexOf(aktif);
+    idx = (idx + (e.key === 'ArrowRight' ? 1 : SERILER.length - 1)) % SERILER.length;
+    aktif = SERILER[idx].id;
+    renderTabs();
+    renderPanel();
+    $('tab-' + aktif).focus();
+  });
+
+  panelEl.addEventListener('click', function (e) {
+    var d = e.target.closest('.dot');
+    if (!d) return;
+    var art = d.closest('article');
+    var i = parseInt(art.getAttribute('data-u'), 10);
+    var k = parseInt(d.getAttribute('data-k'), 10);
+    secili[i] = k;
+    var r = URUNLER[i].renk[k];
+    art.querySelector('.swatch').style.setProperty('--c', r[1]);
+    art.querySelector('[data-renk]').textContent = r[0];
+    art.querySelectorAll('.dot').forEach(function (x) {
+      var on = x === d;
+      x.classList.toggle('is-on', on);
+      x.setAttribute('aria-pressed', String(on));
+    });
+    var cta = art.querySelector('[data-cta]');
+    cta.setAttribute('data-wa', ctaMesaj(i));
+    bindWa(art);
+  });
+
+  /* ---------- Ölçü rehberi ---------- */
+  var gTabs = $('guide-tabs'), gSteps = $('guide-steps');
+  var gAktif = 'cam';
+  function renderGuide() {
+    gTabs.innerHTML = Object.keys(GUIDE).map(function (k) {
+      var on = k === gAktif;
+      return '<button type="button" role="tab" class="tab" id="gtab-' + k + '" data-g="' + k + '" aria-selected="' + on + '" tabindex="' + (on ? 0 : -1) + '">' + GUIDE[k].ad + '</button>';
+    }).join('');
+    gSteps.setAttribute('aria-labelledby', 'gtab-' + gAktif);
+    gSteps.innerHTML = GUIDE[gAktif].adim.map(function (a, n) {
+      return '<li class="flex gap-4"><span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-night font-display text-base font-bold text-white">' + (n + 1) + '</span>' +
+        '<div class="min-w-0"><h3 class="font-display text-lg font-bold leading-snug text-night">' + a[0] + '</h3><p class="mt-1 text-slate-600">' + a[1] + '</p></div></li>';
+    }).join('');
+  }
+  gTabs.addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    gAktif = b.getAttribute('data-g');
+    renderGuide();
+  });
+
+  /* ---------- Hesaplayıcı / talep oluşturucu ---------- */
+  var fTip = $('f-tip'), fSeri = $('f-seri'), fEn = $('f-en'), fBoy = $('f-boy'), fAdet = $('f-adet'), fAd = $('f-ad');
+  var hata = $('f-hata'), sonuc = $('f-sonuc'), ozet = $('sonuc-ozet'), waBtn = $('sonuc-wa');
+  var prevBox = $('prev-box'), prevShade = $('prev-shade');
+
+  fSeri.innerHTML = SERILER.map(function (s) { return '<option value="' + s.id + '">' + s.ad + '</option>'; }).join('');
+
+  function sayi(v) { return parseFloat(String(v).replace(',', '.')); }
+  function tr(n, d) { return n.toLocaleString('tr-TR', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function cm(n) { return Number.isInteger(n) ? String(n) : tr(n, 1); }
+
+  function hesapla() {
+    var en = sayi(fEn.value), boy = sayi(fBoy.value);
+    var adet = parseInt(fAdet.value, 10);
+    if (!(adet >= 1)) adet = 1;
+    var seri = seriBul(fSeri.value);
+    var ok = isFinite(en) && isFinite(boy) && en >= CFG.min && en <= CFG.max && boy >= CFG.min && boy <= CFG.max;
+
+    hata.hidden = ok;
+    sonuc.hidden = !ok;
+    if (!ok) {
+      hata.textContent = 'En ve boy ölçüleri ' + CFG.min + ' ile ' + CFG.max + ' cm arasında olmalı. Rakamı santimetre olarak yazın, örneğin 118,5.';
+      return;
+    }
+
+    var alan = (en * boy / 10000);
+    var toplam = alan * adet;
+    ozet.textContent = cm(en) + ' × ' + cm(boy) + ' cm · ' + tr(alan, 2) + ' m²' + (adet > 1 ? ' · ' + adet + ' adet, toplam ' + tr(toplam, 2) + ' m²' : '');
+
+    var olcek = 130 / Math.max(en, boy);
+    prevBox.style.width = Math.max(30, en * olcek) + 'px';
+    prevBox.style.height = Math.max(30, boy * olcek) + 'px';
+    prevShade.style.setProperty('--c', seri.renk);
+    prevShade.style.opacity = seri.id === 'tul' ? '.72' : '1';
+    prevShade.classList.toggle('pleat-petek', seri.id === 'petek');
+
+    var satirlar = [
+      'Merhaba, pilise perde için fiyat teklifi almak istiyorum.',
+      'Pencere tipi: ' + fTip.value,
+      'Seri: ' + seri.ad,
+      'Ölçü: ' + cm(en) + ' cm (en) x ' + cm(boy) + ' cm (boy)',
+      'Adet: ' + adet,
+      'Toplam alan: ' + tr(toplam, 2) + ' m²'
+    ];
+    var ad = fAd.value.trim();
+    if (ad) satirlar.push('Adım: ' + ad);
+    waBtn.setAttribute('data-wa', satirlar.join('\n'));
+    bindWa(sonuc);
+  }
+
+  [fTip, fSeri, fEn, fBoy, fAdet, fAd].forEach(function (el) {
+    el.addEventListener('input', hesapla);
+    el.addEventListener('change', hesapla);
+  });
+  $('lead-form').addEventListener('submit', function (e) { e.preventDefault(); });
+
+  /* ---------- Başlat ---------- */
+  renderTabs();
+  renderPanel();
+  renderGuide();
+  hesapla();
+  bindWa(document);
+})();
+</script>
+
+</body></html>
